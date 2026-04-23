@@ -223,3 +223,29 @@ function showToast(msg) {
         el.addEventListener('hidden.bs.toast', () => el.remove());
     } catch (e) { alert(msg); }
 }
+
+/* ── MOBILE DRAWER (plain JS, no checkbox hack) ── */
+const drawer        = document.getElementById('mobileDrawer');
+const overlay       = document.getElementById('drawerOverlay');
+const hamburgerBtn  = document.getElementById('hamburgerBtn');
+const drawerCloseBtn= document.getElementById('drawerCloseBtn');
+
+function openDrawer() {
+    drawer.classList.add('open');
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+}
+function closeDrawer() {
+    drawer.classList.remove('open');
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+}
+
+hamburgerBtn.addEventListener('click', openDrawer);
+drawerCloseBtn.addEventListener('click', closeDrawer);
+overlay.addEventListener('click', closeDrawer);
+
+/* Close drawer when a menu item is tapped */
+document.getElementById('mobileSidebarBody').addEventListener('click', function(e) {
+    if (e.target.closest('.sb-item')) closeDrawer();
+});
